@@ -144,4 +144,12 @@ console.log(list.get(3))
 // console.log(list.get(2))
 // console.log(list.get(3))
 
-
+function indexAt(head, index){
+    let counter = 1
+    let node = head 
+    while(counter <= index){
+        node = collection[node[1]]
+        counter++ 
+    }
+    return node 
+}

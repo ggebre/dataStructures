@@ -14,8 +14,9 @@ function BFS(tree){
         
         queue.push(tree.root)
         while(queue.length){
-            node = queue.shift()
+            node = queue.shift()    //take the first element of the queue 
             visited.push(node.value)
+            // check if the node has left and/or right, and push them to the queue 
             if(node.left) queue.push(node.left)
             if(node.right) queue.push(node.right)
         } 
