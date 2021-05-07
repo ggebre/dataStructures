@@ -33,14 +33,14 @@ class PriorityQueue {
     }
     dequeue(){
         // swap last and first element 
-        let max = this.values[0]
+        let min = this.values[0]
         let end = this.values.pop()
         if(this.values.length > 0){
             this.values[0] = end 
             this.bubbleDown()
         }
         
-        return max
+        return min
     }
     bubbleDown(){
         let idx = 0

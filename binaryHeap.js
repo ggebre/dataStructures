@@ -1,5 +1,5 @@
 // heap is a tree structure 
-// maxBinaryHeap --- parent nodes are higher than the children but there is no order of the children 
+// maxBinaryHeap --- parent nodes are higher in value than the children but there is no order of the children 
 // minBinaryHeap --- parent nodes are lower than the children but there is no order of the children 
 class Heap {
     constructor(){
@@ -97,7 +97,9 @@ heap.insert(20)
 heap.insert(49)
 
 heap.insert(99)
+heap.insert(99)
 
+console.log(heap.values)
 // [99, 80, 50, 60, 23, 3, 13, 20, 49]
 // console.log(heap.values)
 console.log(heap.extractMax())
