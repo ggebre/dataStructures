@@ -1,13 +1,17 @@
-// heap is a tree structure 
-// maxBinaryHeap --- parent nodes are higher than the children but there is no order of the children 
-// minBinaryHeap --- parent nodes are lower than the children but there is no order of the children 
-class Heap {
+// priority queue is a data structure where each element is associated 
+// with priority. Elements with high priority are fetched first than element
+// with a lower priority 
+// priority 1 is the highest priority than the rest...
+// min heap datastructure 
+class PriorityQueue {
     constructor(){
         this.values = []
     }
-    insert(value){
-        this.values.push(value)
+    enqueue(value, priority){
+        let node = new Node(value, priority)
+        this.values.push(node)
         this.bubbleUp()
+        return this 
     }
     bubbleUp(){
         // finds the parent of the last element and swap them if last element is greater than its parent element
@@ -20,13 +24,14 @@ class Heap {
             
             let parentIdx = Math.floor((idx - 1) / 2)
             let parent = this.values[parentIdx] 
-            if( element <= parent) break; 
+            if( element.priority >= parent.priority) break; 
             this.values[parentIdx] = element 
             this.values[idx] = parent 
             idx = parentIdx
         }
+
     }
-    extractMax(){
+    dequeue(){
         // swap last and first element 
         let max = this.values[0]
         let end = this.values.pop()
@@ -53,7 +58,7 @@ class Heap {
             if(leftChildIdx < length){
                 leftChild = this.values[leftChildIdx]
                 
-                if(leftChild > element){
+                if(leftChild.priority < element.priority){
                     
                     swap = leftChildIdx
                 }
@@ -62,8 +67,8 @@ class Heap {
                 rightChild = this.values[rightChildIdx]
                 
                 if(
-                    (swap === null && rightChild > element) || 
-                    (swap !== null && rightChild > leftChild)
+                    (swap === null && rightChild.priority < element.priority) || 
+                    (swap !== null && rightChild.priority < leftChild.priority)
                     ){
                         
                         swap = rightChildIdx
@@ -76,39 +81,21 @@ class Heap {
             idx = swap 
         }
     }
-    
 }
 
-let heap = new Heap()
+class Node {
+    constructor(val, priority){
+        this.val = val 
+        this.priority = priority
+    }
+}
 
-
-heap.insert(100)
-heap.insert(60)
-heap.insert(50)
-heap.insert(80)
-heap.insert(23)
-
-heap.insert(3)
-
-heap.insert(13)
-
-heap.insert(20)
-
-heap.insert(49)
-
-heap.insert(99)
-
-// [99, 80, 50, 60, 23, 3, 13, 20, 49]
-// console.log(heap.values)
-console.log(heap.extractMax())
-console.log(heap.values)
-// console.log(heap.values)
-// console.log(heap.extractMax())
-// console.log(heap)
-// console.log(heap.extractMax())
-// console.log(heap)
-// console.log(heap.extractMax())
-
-
-
-
+let priority = new PriorityQueue()
+priority.enqueue('Ruth', 2)
+priority.enqueue('Getu', 1)
+priority.enqueue('Get', 3)
+priority.enqueue('Sami', 8)
+priority.enqueue('GG', 6)
+priority.enqueue('EG', 5)
+priority.enqueue('SG', 4)
+priority.enqueue('Eskedar', 7)
