@@ -25,25 +25,72 @@ class Graph {
         this.adjacencyList[vertex].forEach(v => this.removeEdge(vertex, v) )
         delete this.adjacencyList[vertex] 
     }
+
+    DFSRecursive(vertex){
+        //  The function should accept a starting node 
+        //  Create a list to store the end result, to be returned at the very end 
+        //  Create an object to store visited vertices 
+        // Create a helper function which accepts a vertex 
+            //  The helper function should return early if the vertex is empty
+            //  The helper function should place the vertex it accepts into the visited
+            //  object and push that vertex into the result array 
+            //  Loop over all of the values in the adjacencyList for that vertex 
+            //  if any of those values have not been visited, recursively invoke the helper
+            //  function with that vertex 
+        // invoke the helper function with the starting vertex
+        // return the result list 
+        
+        let result = []
+        let visited = {}
+        let adjacencyList = this.adjacencyList;
+
+        (function dfs(vertex){
+            if(!vertex) return null 
+            visited[vertex] = true 
+            result.push(vertex)
+            adjacencyList[vertex].forEach(v => {
+                if(!visited[v]){
+                    dfs(v)
+                }
+            })
+        })(vertex)
+        
+        // function dfs(vertex){
+        //     if(!vertex) return null 
+        //     visited[vertex] = true 
+        //     result.push(vertex)
+        //     adjacencyList[vertex].forEach(v => {
+        //         if(!visited[v]){
+        //             dfs(v)
+        //         }
+        //     })
+        // }
+        // dfs(vertex)
+        return result 
+    }
 }
 let graph = new Graph()
-graph.addVertex("Chicago")
-graph.addVertex("LA")
-graph.addVertex("Colorado")
-graph.addVertex("Indiana")
+graph.addVertex("A")
+graph.addVertex("B")
+graph.addVertex("C")
+graph.addVertex("D")
+graph.addVertex("E")
+graph.addVertex("F")
 
-graph.addEdge("Chicago", "Colorado")
-graph.addEdge("Chicago", "Indiana")
-graph.addEdge("Chicago", "LA")
-graph.addEdge("LA", "Colorado")
-graph.addEdge("LA", "Indiana")
-graph.addEdge("LA", "Indiana")
-graph.addEdge("LA", "Indiana")
-graph.addEdge("LA", "Indiana")
-graph.addEdge("LA", "Indiana")
 
-graph.addEdge("Chicago", "ADDIS ABABA")
-console.log(graph.removeEdge("Getu", "Chicago"))
+graph.addEdge("A", "B")
+graph.addEdge("A", "C")
+graph.addEdge("B", "D")
+graph.addEdge("C", "E")
+graph.addEdge("D", "E")
+graph.addEdge("D", "F")
+graph.addEdge("E", "F")
+
+
+console.log(graph.adjacencyList["A"])
+ 
+console.log(graph.DFSRecursive("A"))
+console.log(graph.DFSRecursive("B"))
 
 
 
