@@ -101,29 +101,33 @@ class Graph {
         return result  
     }
 }
-let graph = new Graph()
-graph.addVertex("A")
-graph.addVertex("B")
-graph.addVertex("C")
-graph.addVertex("D")
-graph.addVertex("E")
-graph.addVertex("F")
+// let graph = new Graph()
+// graph.addVertex("A")
+// graph.addVertex("B")
+// graph.addVertex("C")
+// graph.addVertex("D")
+// graph.addVertex("E")
+// graph.addVertex("F")
 
 
-graph.addEdge("A", "B")
-graph.addEdge("A", "C")
-graph.addEdge("B", "D")
-graph.addEdge("C", "E")
-graph.addEdge("D", "E")
-graph.addEdge("D", "F")
-graph.addEdge("E", "F")
+// graph.addEdge("A", "B")
+// graph.addEdge("A", "C")
+// graph.addEdge("B", "D")
+// graph.addEdge("C", "E")
+// graph.addEdge("D", "E")
+// graph.addEdge("D", "F")
+// graph.addEdge("E", "F")
 
 
-console.log(graph.adjacencyList["A"])
+// console.log(graph.adjacencyList["A"])
  
-console.log(graph.DFSRecursive("A"))
-console.log(graph.DFSIterative("A"))
+// console.log(graph.DFSRecursive("A"))
+// console.log(graph.DFSIterative("A"))
 
 
+
+
+    
+    
 
 
