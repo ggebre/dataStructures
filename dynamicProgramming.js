@@ -22,7 +22,7 @@ const howSum = (targetSum, numbers, memo={}) => {
         const remainder = targetSum - num 
         const remainderResult = howSum(remainder, numbers, memo)
         if(remainderResult){
-            console.log(num, remainder)
+            
             memo[targetSum] = [...remainderResult, num]
             return memo[targetSum]
         }
@@ -31,20 +31,22 @@ const howSum = (targetSum, numbers, memo={}) => {
     return memo[targetSum]
 }
 // return an array with least number of elements that add up to the targetSum  
-const bestSum = (targetSum, numbers) => {
+const bestSum = (targetSum, numbers, memo={}) => {
+    if(targetSum in memo) return memo[targetSum]
     if(targetSum === 0) return []
     if(targetSum < 0) return null 
     let shortestCombination = null 
     for(let num of numbers){
         const remainder = targetSum - num 
-        const remainderCombination = bestSum(remainder, numbers)
+        const remainderCombination = bestSum(remainder, numbers, memo)
         if(remainderCombination !== null){
-           const combination = [...remainderCombination, num]
-           if(shortestCombination === null || combination.length < shortestCombination.length){
-               shortestCombination = combination
+            // const combination = [...remainderCombination, num]
+            memo[targetSum] = [...remainderCombination, num]
+           if(shortestCombination === null || memo[targetSum].length < shortestCombination.length){
+               shortestCombination = memo[targetSum]
            }
         }
     }
     return shortestCombination
 }
-console.log(bestSum(7, [1,2,3,7]))
+console.log(bestSum(100, [1,2,3,7, 25]))
