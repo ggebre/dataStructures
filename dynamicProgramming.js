@@ -1,3 +1,5 @@
+// visualize through trees
+
 // return true if any combination of the elements in the array add up to target Sum 
 const canSumMemo = (targetSum, array, memo={}) => {
     if(targetSum in memo) return memo[targetSum]
@@ -49,4 +51,60 @@ const bestSum = (targetSum, numbers, memo={}) => {
     }
     return shortestCombination
 }
-console.log(bestSum(100, [1,2,3,7, 25]))
+// write a function canConstruct(target, wordBank) that accepts a target string and an array of strings
+// the function should return a boolean whether or not the target can be constructed by concatenating words from the word bank 
+// you may reuse elements of wordBank 
+
+const canConstruct = (target, wordBank, memo={}) => {
+    if(target in memo) return memo[target]
+    if (target === "") return true 
+    for(str of wordBank){
+        if(target.startsWith(str)){
+            let newTarget = target.slice(str.length )
+            memo[target] = canConstruct(newTarget, wordBank, memo)
+            return memo[target]
+            // return canConstruct(newTarget, wordBank, memo)
+        }
+    }
+     memo[target] = false 
+    return memo[target]
+}
+// hello from ['he', 'll', 'o']
+// console.log(canConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', ['e', 'ee', 'eee', 'eeeee', 'eeeeee', 'eeeeeee']))
+const countConstruct = (target, wordBank, memo={}) => {
+    // function returns the number of ways that the target can be constructed by concatenating elemnts of the 
+    // wordBank array 
+    if(target in memo) return memo[target]
+    if(target === '') return 1
+    let count = 0 
+    for(str of wordBank){
+        if(target.indexOf(str) === 0){
+            let suffix = target.slice(str.length)
+            count +=  countConstruct(suffix, wordBank)
+            // return countConstruct(suffix, wordBank, memo) + 1
+        }
+    }
+    memo[target] = count 
+    return memo[target]
+}
+
+const allConstruct = (target, wordBank, memo={}) => {
+    // return a two d array of words from the wordBank which can get concatenated to equal target
+    if(target in memo) return memo[target]
+    if(target === '') return [[]]
+    let allCombinations = [] 
+    for(let str of wordBank){
+        if(target.startsWith(str)){
+            const suffix = target.slice(str.length)
+            // const suffixWays = allConstruct(suffix, wordBank)
+            memo[target] = allConstruct(suffix, wordBank)
+            // const targetWays = suffixWays.map(way => [str, ...way])
+            const targetWays = memo[target].map(way => [str, ...way])
+           
+            allCombinations.push(...targetWays)
+        }
+        
+    }
+    return allCombinations
+}
+// console.log(allConstruct('getu', ['g', 'etu', 'e', 'tu', 't', 'u']))
