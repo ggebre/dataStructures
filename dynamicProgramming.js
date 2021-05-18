@@ -1,10 +1,14 @@
 // visualize through trees
+// 
+
+// MEMOISATION 
+
 
 // return true if any combination of the elements in the array add up to target Sum 
 const canSumMemo = (targetSum, array, memo={}) => {
     if(targetSum in memo) return memo[targetSum]
     if(targetSum === 0) return true
-    if(targetSum < Math.min(...array)) return false  
+    if(targetSum < 0) return false  
     for(let num of array){
         const remainder = targetSum - num 
         memo[remainder] = canSumMemo(remainder, array, memo)
@@ -97,7 +101,7 @@ const allConstruct = (target, wordBank, memo={}) => {
         if(target.startsWith(str)){
             const suffix = target.slice(str.length)
             // const suffixWays = allConstruct(suffix, wordBank)
-            memo[target] = allConstruct(suffix, wordBank)
+            memo[target] = allConstruct(suffix, wordBank, memo)
             // const targetWays = suffixWays.map(way => [str, ...way])
             const targetWays = memo[target].map(way => [str, ...way])
            
@@ -105,6 +109,35 @@ const allConstruct = (target, wordBank, memo={}) => {
         }
         
     }
+    memo[target] = allCombinations
     return allCombinations
 }
-// console.log(allConstruct('getu', ['g', 'etu', 'e', 'tu', 't', 'u']))
+// console.log(allConstruct('aaaaaaaaaaaaaaaaaa', ['a', 'aa', 'aaa', 'aaaa', 'aaaaa', 'aaaaaa']))
+
+// const digitCombinations = (digits) => {
+//     let combination = []
+//     for(let i=0; i < digits.length; i++){
+//         let first = digits[i]
+//         let index = i + 1 
+//         while(index <= digits.length){
+//             let sliced = digits.slice(i, index)
+//             combination.push(sliced)
+//             index++
+//         }
+//     }
+//     return combination
+// }
+
+// console.log(digitCombinations("1224"))
+
+// TABULATION IMPLEMENTATION 
+// find the nth fibanacci number O(n) time complexity O(n) space complexity
+const fib = (n) => {
+    let arr = new Array(n)
+    arr[0] = 1
+    arr[1] = 1 
+    for(let i = 2; i < n; i++){
+        arr[i] = arr[i - 1] + arr[i - 2]
+    }
+    return arr[n - 1]
+}
